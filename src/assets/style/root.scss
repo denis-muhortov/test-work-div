@@ -1,0 +1,20 @@
+:root {
+  --white: rgba(255, 255, 255, 1);
+  --white-lite: rgba(247, 247, 247, 1);
+  --black: rgba(0, 0, 0, 1);
+  --primary: rgba(51, 0, 255, 1);
+  --success: rgba(229, 245, 225, 1);
+  --error: rgba(255, 224, 224, 1);
+  --text-base: 16px;
+  --text-large: 18px;
+  --text-subtitle: 20px;
+  --text-title: 24px;
+  --text-intro: 48px;
+  --layout: 886px;
+  --transition: all 0.25s ease;
+}
+
+.layout {
+  width: 100%;
+  max-width: var(--layout);
+}
