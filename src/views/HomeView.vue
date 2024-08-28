@@ -2,6 +2,7 @@
 import { ref, watch, type Ref } from 'vue'
 import { questions } from '@/utils/questions'
 import type { UserAnswer, Result } from '@/interface'
+import { debounce } from '@/scripts/debounce'
 import BlockQuestions from '@/components/question/BlockQuestions.vue'
 import BlockProgressBar from '@/components/progress/BlockProgressBar.vue'
 import BlockResult from '@/components/result/BlockResult.vue'
@@ -60,13 +61,12 @@ const checkResult = () => {
   })
 }
 
+const debouncedFn = debounce(nextQuestion, 1000)
 watch(
   () => userAnswers.value,
-  (newValue) => {
+  async (newValue) => {
     if (newValue.length != 0) {
-      setTimeout(() => {
-        nextQuestion()
-      }, 1000)
+      debouncedFn()
     } else {
       setTimeout(() => {
         checkResult()
