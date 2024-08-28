@@ -45,7 +45,7 @@ const cheackQuestion = computed(() => props.result.valid)
     }
     &__answer {
       font-size: var(--text-base);
-      font-weight: 600;
+      font-weight: 400;
     }
   }
 }

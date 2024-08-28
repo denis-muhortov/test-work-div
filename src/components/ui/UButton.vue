@@ -22,6 +22,6 @@ const props = defineProps<{
   color: var(--white) !important;
   border: none !important;
   font-size: var(--text-large) !important;
-  --p-button-label-font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 </style>

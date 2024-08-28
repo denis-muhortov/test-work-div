@@ -57,7 +57,7 @@ const updateSelectedAnswer = computed({
   &__label {
     width: 100%;
     font-size: var(--text-base);
-    font-weight: 600;
+    font-weight: 400;
     margin-inline-start: 12px;
     user-select: none;
     cursor: pointer;
