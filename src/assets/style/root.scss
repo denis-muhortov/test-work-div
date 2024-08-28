@@ -17,4 +17,32 @@
 .layout {
   width: 100%;
   max-width: var(--layout);
+  margin: 80px 0;
+}
+
+@media (max-width: 920px) {
+  :root {
+    --layout: 600px;
+    --text-base: 14px;
+    --text-large: 16px;
+    --text-subtitle: 18px;
+    --text-title: 20px;
+    --text-intro: 36px;
+  }
+}
+@media (max-width: 700px) {
+  :root {
+    --layout: 480px;
+    --text-intro: 24px;
+  }
+}
+@media (max-width: 500px) {
+  :root {
+    --layout: 380px;
+  }
+}
+@media (max-width: 400px) {
+  :root {
+    --layout: 320px;
+  }
 }

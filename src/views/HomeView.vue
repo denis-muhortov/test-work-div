@@ -118,4 +118,10 @@ const cheackResult = () => {
     flex-grow: 1;
   }
 }
+@media (max-width: 500px) {
+  .wrapper {
+    min-height: calc(100vh - 80px);
+    margin: 40px 0;
+  }
+}
 </style>
