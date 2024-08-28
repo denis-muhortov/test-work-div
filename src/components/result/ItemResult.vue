@@ -26,7 +26,7 @@ const cheackQuestion = computed(() => props.result.valid)
   height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: start;
 
   &-container {
@@ -36,7 +36,7 @@ const cheackQuestion = computed(() => props.result.valid)
     background-color: var(--error);
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: start;
 
     &__question {
