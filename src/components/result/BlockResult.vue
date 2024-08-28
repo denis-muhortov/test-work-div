@@ -30,7 +30,7 @@ const countAppropriatelyAnswer = computed(() => {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
   gap: 40px;
   &-message {
     width: 100%;
@@ -40,7 +40,7 @@ const countAppropriatelyAnswer = computed(() => {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: start;
+    align-items: flex-start;
     gap: 20px;
   }
 }

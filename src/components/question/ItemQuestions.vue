@@ -35,7 +35,7 @@ const updateSelectedAnswer = computed({
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
   cursor: pointer;
 
   &__input {

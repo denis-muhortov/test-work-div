@@ -20,11 +20,6 @@ const updateAnswer = computed({
     emit('getAnswer', userAnswer)
   },
 })
-
-const mixQuestions = computed(() => {
-  const newQuestions = props.questions?.questions ?? []
-  return newQuestions
-})
 </script>
 <template>
   <div class="questions">
@@ -35,14 +30,11 @@ const mixQuestions = computed(() => {
       </div>
       <div class="questions-container__items">
         <ItemQuestions
-          v-for="item in mixQuestions"
+          v-for="item in props.questions?.questions"
           :key="item.id"
           :question="item"
           v-model:updateAnswer="updateAnswer"
         />
-      </div>
-      <div class="questions-container__controller">
-        <slot name="controller" />
       </div>
     </div>
   </div>
@@ -54,7 +46,7 @@ const mixQuestions = computed(() => {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
   gap: 20px;
   flex-grow: 1;
 
@@ -68,7 +60,7 @@ const mixQuestions = computed(() => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     gap: 20px;
     background-color: var(--white-lite);
     border-radius: 20px;
@@ -84,15 +76,9 @@ const mixQuestions = computed(() => {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: start;
+      align-items: flex-start;
       gap: 16px;
       flex-grow: 1;
-    }
-    &__controller {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
     }
   }
 }

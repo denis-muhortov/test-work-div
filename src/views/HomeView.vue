@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type Ref } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 import { questions } from '@/utils/questions'
 import type { UserAnswer, Result } from '@/interface'
 import BlockQuestions from '@/components/question/BlockQuestions.vue'
@@ -21,13 +21,10 @@ const nextQuestion = () => {
   else {
     counterQuestion.value++
     setTimeout(() => {
-      cheackResult()
+      checkResult()
     }, 250)
   }
 }
-const cheackAnswer = computed(
-  () => counterQuestion.value !== userAnswers.value.length,
-)
 
 const resetResult = () => {
   counterQuestion.value = 0
@@ -36,7 +33,7 @@ const resetResult = () => {
 }
 
 const results: Ref<Result[]> = ref([])
-const cheackResult = () => {
+const checkResult = () => {
   questions.forEach((question) => {
     const userAnswer = userAnswers.value.find(
       (answer) => answer.questionId === question.id,
@@ -62,6 +59,24 @@ const cheackResult = () => {
     }
   })
 }
+
+watch(
+  () => userAnswers.value,
+  (newValue) => {
+    if (newValue.length != 0) {
+      setTimeout(() => {
+        nextQuestion()
+      }, 1000)
+    } else {
+      setTimeout(() => {
+        checkResult()
+      }, 250)
+    }
+  },
+  {
+    deep: true,
+  },
+)
 </script>
 
 <template>
@@ -71,17 +86,7 @@ const cheackResult = () => {
         <BlockQuestions
           :questions="questions[counterQuestion]"
           @get-answer="(newAnswer: UserAnswer) => pushAnswers(newAnswer)"
-        >
-          <template #controller>
-            <UButton
-              @click="nextQuestion()"
-              :icon="'pi pi-angle-right'"
-              :title="'Ответить'"
-              :position-icons="'right'"
-              :disabled="!cheackAnswer"
-            />
-          </template>
-        </BlockQuestions>
+        />
         <BlockProgressBar
           :progress="counterQuestion"
           :total="questions.length"

@@ -29,7 +29,7 @@ const percentProgress = computed(() =>
   background-color: var(--white-lite);
   display: flex;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
   gap: 40px;
   border-radius: 10px;
 

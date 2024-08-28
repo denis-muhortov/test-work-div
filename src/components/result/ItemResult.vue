@@ -6,10 +6,10 @@ const props = defineProps<{
   result: Result
 }>()
 
-const cheackQuestion = computed(() => props.result.valid)
+const checkQuestion = computed(() => props.result.valid)
 </script>
 <template>
-  <div class="result" :class="{ appropriately: cheackQuestion }">
+  <div class="result" :class="{ appropriately: checkQuestion }">
     <div class="result-container">
       <div class="result-container__question mb-2">
         {{ props.result.question }}
@@ -27,7 +27,7 @@ const cheackQuestion = computed(() => props.result.valid)
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
 
   &-container {
     width: 100%;
@@ -37,7 +37,7 @@ const cheackQuestion = computed(() => props.result.valid)
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: start;
+    align-items: flex-start;
 
     &__question {
       font-size: var(--text-subtitle);
