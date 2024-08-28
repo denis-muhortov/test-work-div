@@ -49,7 +49,7 @@ messageForUser()
   }
   &-text {
     font-size: var(--text-title);
-    font-weight: 400;
+    font-weight: 600;
   }
 }
 </style>
