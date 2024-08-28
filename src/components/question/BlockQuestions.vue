@@ -28,10 +28,11 @@ const mixQuestions = computed(() => {
 </script>
 <template>
   <div class="questions">
-    <p class="questions-title">
-      {{ questions?.title }}
-    </p>
+    <p class="questions-title">Тестирование</p>
     <div class="questions-container">
+      <div class="questions-container__title">
+        {{ questions?.title }}
+      </div>
       <div class="questions-container__items">
         <ItemQuestions
           v-for="item in mixQuestions"
@@ -74,6 +75,10 @@ const mixQuestions = computed(() => {
     padding: 40px;
     flex-grow: 1;
 
+    &__title {
+      font-size: var(--text-title);
+      font-weight: 700;
+    }
     &__items {
       width: 100%;
       display: flex;
@@ -81,6 +86,7 @@ const mixQuestions = computed(() => {
       justify-content: start;
       align-items: start;
       gap: 16px;
+      flex-grow: 1;
     }
     &__controller {
       width: 100%;
