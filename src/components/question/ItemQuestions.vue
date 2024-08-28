@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { Question } from '@/interface'
 import { computed } from 'vue'
 
 const emit = defineEmits(['update:updateAnswer'])
 const props = defineProps<{
-  question: Object
+  question: Question
 }>()
 const updateSelectedAnswer = computed({
   get() {
@@ -18,13 +19,13 @@ const updateSelectedAnswer = computed({
   <div class="question">
     <input
       type="radio"
-      :id="props.question.id"
+      :id="props.question.id.toString()"
       :value="props.question.text"
       v-model="updateSelectedAnswer"
       name="drone"
       class="question__input"
     />
-    <label :for="props.question.id" class="question__label">{{
+    <label :for="props.question.id.toString()" class="question__label">{{
       props.question.text
     }}</label>
   </div>
@@ -35,6 +36,7 @@ const updateSelectedAnswer = computed({
   display: flex;
   justify-content: start;
   align-items: start;
+  cursor: pointer;
 
   &__input {
     appearance: none;
@@ -46,6 +48,7 @@ const updateSelectedAnswer = computed({
     border-radius: 10px;
     border: 1px solid var(--black);
     transition: var(--transition);
+    cursor: pointer;
   }
   &__input:checked {
     background: var(--primary);

@@ -1,17 +1,15 @@
 <script setup lang="ts">
+import type { Result } from '@/interface'
 import { computed } from 'vue'
 
 const props = defineProps<{
-  result: Object
+  result: Result
 }>()
 
 const cheackQuestion = computed(() => props.result.valid)
 </script>
 <template>
   <div class="result" :class="{ appropriately: cheackQuestion }">
-    <div class="result__title mb-3">
-      {{ cheackQuestion ? 'Правильный ответ' : 'Неправильный ответ' }}
-    </div>
     <div class="result-container">
       <div class="result-container__question mb-2">
         {{ props.result.question }}
@@ -19,7 +17,6 @@ const cheackQuestion = computed(() => props.result.valid)
       <div class="result-container__answer">
         {{ props.result.answer }}
       </div>
-      {{ props.result.valid }}
     </div>
   </div>
 </template>
@@ -31,11 +28,6 @@ const cheackQuestion = computed(() => props.result.valid)
   flex-direction: column;
   justify-content: start;
   align-items: start;
-
-  &__title {
-    font-size: var(--text-title);
-    font-weight: 700;
-  }
 
   &-container {
     width: 100%;

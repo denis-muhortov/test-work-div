@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { computed, ref, type Ref } from 'vue'
+import { questions } from '@/utils/questions'
+import type { UserAnswer, Result } from '@/interface'
 import BlockQuestions from '@/components/question/BlockQuestions.vue'
+import BlockProgressBar from '@/components/progress/BlockProgressBar.vue'
 import BlockResult from '@/components/result/BlockResult.vue'
 import UButton from '@/components/ui/UButton.vue'
-import { questions } from '@/utils/questions'
-import { computed, ref } from 'vue'
 
-const userAnswers = ref([])
-const pushAnswers = (answerItem) => {
+const userAnswers: Ref<UserAnswer[]> = ref([])
+const pushAnswers = (answerItem: UserAnswer) => {
   userAnswers.value = userAnswers.value.filter(
     (el) => answerItem.questionId != el.questionId,
   )
@@ -15,10 +17,12 @@ const pushAnswers = (answerItem) => {
 
 const counterQuestion = ref(0)
 const nextQuestion = () => {
-  if (counterQuestion.value != 8) counterQuestion.value++
+  if (counterQuestion.value != questions.length - 1) counterQuestion.value++
   else {
-    console.log('вы ответили на все вопросы')
-    cheackResult()
+    counterQuestion.value++
+    setTimeout(() => {
+      cheackResult()
+    }, 250)
   }
 }
 const cheackAnswer = computed(
@@ -31,28 +35,30 @@ const resetResult = () => {
   results.value = []
 }
 
-const results = ref([])
+const results: Ref<Result[]> = ref([])
 const cheackResult = () => {
   questions.forEach((question) => {
     const userAnswer = userAnswers.value.find(
       (answer) => answer.questionId === question.id,
     )
-    if (userAnswer.answer === question.answer) {
-      const res = {
-        id: question.id,
-        question: question.title,
-        answer: userAnswer.answer,
-        valid: true,
+    if (userAnswer) {
+      if (userAnswer.answer === question.answer) {
+        const res = {
+          id: question.id,
+          question: question.title,
+          answer: userAnswer.answer,
+          valid: true,
+        }
+        results.value.push(res)
+      } else {
+        const res = {
+          id: question.id,
+          question: question.title,
+          answer: userAnswer.answer,
+          valid: false,
+        }
+        results.value.push(res)
       }
-      results.value.push(res)
-    } else {
-      const res = {
-        id: question.id,
-        question: question.title,
-        answer: userAnswer.answer,
-        valid: false,
-      }
-      results.value.push(res)
     }
   })
 }
@@ -64,11 +70,11 @@ const cheackResult = () => {
       <div class="wrapper-block" v-if="results.length === 0">
         <BlockQuestions
           :questions="questions[counterQuestion]"
-          @get-answer="(newAnswer) => pushAnswers(newAnswer)"
+          @get-answer="(newAnswer: UserAnswer) => pushAnswers(newAnswer)"
         >
           <template #controller>
             <UButton
-              @click="nextQuestion(counterQuestion)"
+              @click="nextQuestion()"
               :icon="'pi pi-angle-right'"
               :title="'Ответить'"
               :position-icons="'right'"
@@ -76,6 +82,11 @@ const cheackResult = () => {
             />
           </template>
         </BlockQuestions>
+        <BlockProgressBar
+          :progress="counterQuestion"
+          :total="questions.length"
+          class="mt-10"
+        />
       </div>
       <div class="wrapper-block" v-else>
         <BlockResult :results="results" />

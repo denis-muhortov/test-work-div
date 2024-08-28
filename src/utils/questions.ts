@@ -1,4 +1,6 @@
-export const questions = [
+import type { Questions } from '@/interface'
+
+const defaultQuestions = [
   {
     id: 1,
     title: 'Что такое операционная система?',
@@ -210,4 +212,11 @@ export const questions = [
     ],
     answer: 'BolSFS',
   },
-]
+] as Questions[]
+
+const mixQuestions = defaultQuestions.sort(() => Math.random() - 0.5)
+for (const question of mixQuestions) {
+  question.questions.sort(() => Math.random() - 0.5)
+}
+
+export const questions = mixQuestions

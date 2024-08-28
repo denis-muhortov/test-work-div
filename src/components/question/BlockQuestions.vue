@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import type { Questions } from '@/interface'
+import { computed } from 'vue'
 import ItemQuestions from './ItemQuestions.vue'
 
 const emit = defineEmits(['getAnswer'])
 const props = defineProps<{
-  questions: Object
+  questions?: Questions
 }>()
 
 const updateAnswer = computed({
@@ -13,22 +14,27 @@ const updateAnswer = computed({
   },
   set(newAnswer) {
     const userAnswer = {
-      questionId: props.questions.id,
+      questionId: props.questions?.id,
       answer: newAnswer,
     }
     emit('getAnswer', userAnswer)
   },
 })
+
+const mixQuestions = computed(() => {
+  const newQuestions = props.questions?.questions ?? []
+  return newQuestions
+})
 </script>
 <template>
   <div class="questions">
     <p class="questions-title">
-      {{ questions.title }}
+      {{ questions?.title }}
     </p>
     <div class="questions-container">
       <div class="questions-container__items">
         <ItemQuestions
-          v-for="item in props.questions.questions"
+          v-for="item in mixQuestions"
           :key="item.id"
           :question="item"
           v-model:updateAnswer="updateAnswer"
