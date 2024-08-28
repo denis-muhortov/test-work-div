@@ -54,7 +54,7 @@ const mixQuestions = computed(() => {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  gap: 12px;
+  gap: 20px;
   flex-grow: 1;
 
   &-title {
